@@ -2,7 +2,7 @@
 
 const GREETINGS = [
   {
-    id: 'boss',
+    id: 'yo',
     recipient: 'Boss',
     sound: 'JINGLE',
     message: "Wishing you and your family a happy, healthy Christmas! Thank you for all your incredible support this year. May your holiday be filled with magical moments and cherished memories. You're the leader who truly inspires us all!",
