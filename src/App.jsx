@@ -18,9 +18,9 @@ function App() {
         }}
       >
         <Routes>
-          <Route path="/" element={<Navigate to="/gift/dave" replace />} />
+          <Route path="/" element={<Navigate to="/gift-for/boss" replace />} />
           <Route path="/gift-for/:recipientId" element={<GiftPage />} />
-          <Route path="*" element={<Navigate to="/gift/dave" replace />} />
+          <Route path="*" element={<Navigate to="/gift-for/boss" replace />} />
         </Routes>
       </Container>
     </Router>
