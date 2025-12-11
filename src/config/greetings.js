@@ -20,8 +20,8 @@ const GREETINGS = [
     icon: '🤝',
   },
   {
-    id: 'manager',
-    recipient: 'Manager',
+    id: 'kitcha',
+    recipient: 'Kitchana',
     sound: 'CHOIR',
     message: "Thank you for leading with kindness, not commands. Your thoughtful guidance and suggestions make all the difference. You're truly the manager of the year! May your Christmas overflow with love and happiness.",
     confettiColors: ['#006064', '#FF6F00', '#33691E', '#01579B', '#311B92'],
@@ -81,7 +81,17 @@ const GREETINGS = [
     confettiColors: ['#4A148C', '#1B5E20', '#BF360C', '#0D47A1', '#FFD700'],
     niceScore: 96,
     icon: '🙏',
-  }
+  },
+  {
+  id: 'yves',
+  recipient: 'Yves',
+  sound: 'CHOIR',
+  message: "Thank you, Yves, for your continuous support and kindness throughout the year. Your dedication and positivity have truly made a difference. Wishing you a joyful and blessed Christmas as we celebrate the birth of Jesus!",
+  confettiColors: ['#1A237E', '#004D40', '#B71C1C', '#0D47A1', '#FFD700'],
+  niceScore: 94,
+  icon: '🎄',
+}
+
 ];
 
 export { GREETINGS };
