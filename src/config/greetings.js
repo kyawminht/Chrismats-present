@@ -11,8 +11,8 @@ const GREETINGS = [
     icon: '👑',
   },
   {
-    id: 'salio',
-    recipient: 'Miss Salio',
+    id: 'solleil',
+    recipient: 'Miss Solleil',
     sound: 'BELLS',
     message: "Thank you for your incredible kindness and support each month. Your generosity means more than words can say. Wishing you the warmest Christmas filled with joy, peace, and special moments with loved ones.",
     confettiColors: ['#880E4F', '#F57C00', '#004D40', '#D81B60', '#1A237E'],
@@ -21,7 +21,7 @@ const GREETINGS = [
   },
   {
     id: 'kitcha',
-    recipient: 'Kitchana',
+    recipient: 'Miss Kitchana',
     sound: 'CHOIR',
     message: "Thank you for leading with kindness, not commands. Your thoughtful guidance and suggestions make all the difference. You're truly the manager of the year! May your Christmas overflow with love and happiness.",
     confettiColors: ['#006064', '#FF6F00', '#33691E', '#01579B', '#311B92'],

@@ -4,6 +4,10 @@ import App from './App';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline'
 import './App.css'
+import { setDynamicTitle } from "./setDynamicTitle.js";
+
+
+setDynamicTitle();
 // Base dark theme
 const baseTheme = createTheme({
   palette: {
