@@ -99,7 +99,27 @@ const GREETINGS = [
   confettiColors: ['#880E4F', '#4E342E', '#1A237E', '#00695C', '#F9A825'],
   niceScore: 97,
   icon: '✨',
+},
+{
+  id: 'denial',
+  recipient: 'Denial',
+  sound: 'SANTA',
+  message: "Hello Sir Denial, wishing you a Merry Christmas! Thank you for being an amazing leader and guiding us throughout the year.",
+  confettiColors: ['#880E4F', '#4E342E', '#1A237E', '#00695C', '#F9A825'],
+  niceScore: 97,
+  icon: '🎄',
 }
+,
+{
+  id: 'xerxizz',
+  recipient: 'Xerxizz',
+  sound: 'HIGH',
+  message: "Hello bro, apologies if I spelled your name wrong. Wishing you a Merry Christmas filled with joy, love, and blessings!",
+  confettiColors: ['#880E4F', '#4E342E', '#1A237E', '#00695C', '#F9A825'],
+  niceScore: 97,
+  icon: '✨',
+}
+
 
 
 ];

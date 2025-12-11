@@ -20,6 +20,14 @@ const SOUND_MAP = {
     url: '/last-chrismat.mp3',
     volume: 0.6,
   },
+  SANTA: {
+    url: '/santa.mp3',
+    volume: 0.6,
+  },
+   HIGH: {
+    url: '/high.mp3',
+    volume: 0.6,
+  },
   
 };
 
