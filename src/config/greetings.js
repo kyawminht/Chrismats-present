@@ -85,12 +85,22 @@ const GREETINGS = [
   {
   id: 'yves',
   recipient: 'Yves',
-  sound: 'CHOIR',
+  sound: 'BELLS',
   message: "Thank you, Yves, for your continuous support and kindness throughout the year. Your dedication and positivity have truly made a difference. Wishing you a joyful and blessed Christmas as we celebrate the birth of Jesus!",
   confettiColors: ['#1A237E', '#004D40', '#B71C1C', '#0D47A1', '#FFD700'],
   niceScore: 94,
   icon: '🎄',
+},
+{
+  id: 'nycka',
+  recipient: 'Nycka',
+  sound: 'CHOIR',
+  message: "Nycka, May this Christmas fill your heart with peace, love, and beautiful blessings as we celebrate the birth of Jesus. Merry Christmas!",
+  confettiColors: ['#880E4F', '#4E342E', '#1A237E', '#00695C', '#F9A825'],
+  niceScore: 97,
+  icon: '✨',
 }
+
 
 ];
 
