@@ -344,7 +344,7 @@ const GiftPage = () => {
                       With warmest holiday wishes,
                     </Typography>
                     <Typography variant="h6" color="primary" sx={{ mt: 1 }}>
-                      🎅 Your friend kyaw 🎅
+                      🎅 kyaw 🎅
                     </Typography>
                     <Typography variant="caption" color="text.secondary" sx={{ mt: 2, display: 'block' }}>
                       Enjoy the festive snowfall along with the celebration!
