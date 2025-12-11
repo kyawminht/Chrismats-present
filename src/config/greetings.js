@@ -101,8 +101,8 @@ const GREETINGS = [
   icon: '✨',
 },
 {
-  id: 'denial',
-  recipient: 'Denial',
+  id: 'deniel',
+  recipient: 'Sir Deniel',
   sound: 'SANTA',
   message: "Hello Sir Denial, wishing you a Merry Christmas! Thank you for being an amazing leader and guiding us throughout the year.",
   confettiColors: ['#880E4F', '#4E342E', '#1A237E', '#00695C', '#F9A825'],
