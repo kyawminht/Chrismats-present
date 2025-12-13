@@ -68,7 +68,7 @@ const GiftPage = () => {
     
     return {
       id: 'friends',
-      recipient: 'My Facebook Friend',
+      recipient: 'My Friend',
       sound: randomSound,
       message: randomMessage,
       confettiColors: randomColors,
