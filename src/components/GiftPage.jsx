@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   Box,
@@ -12,7 +12,8 @@ import {
   ThemeProvider,
   createTheme,
   IconButton,
-  useMediaQuery // Add this import
+  useMediaQuery, // Add this import
+  Button
 } from '@mui/material';
 import Confetti from 'react-confetti';
 import Snowfall from 'react-snowfall';
@@ -21,46 +22,95 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import { GREETINGS } from '../config/greetings';
 import { SOUND_MAP } from '../soundMap';
+import { Refresh, RefreshOutlined } from '@mui/icons-material';
 
 const GiftPage = () => {
   const { recipientId } = useParams();
   const baseTheme = useTheme();
-  const isMobile = useMediaQuery(baseTheme.breakpoints.down('sm')); // Check if mobile
+  const isMobile = useMediaQuery(baseTheme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(baseTheme.breakpoints.between('sm', 'md'));
   
+  // State declarations
   const [showConfetti, setShowConfetti] = useState(true);
   const [showCard, setShowCard] = useState(false);
   const [animatedText, setAnimatedText] = useState('');
   const [textIndex, setTextIndex] = useState(0);
   const [isSoundOn, setIsSoundOn] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [greetingVersion, setGreetingVersion] = useState(0);
   
-  // Find recipient data
-  const recipient = GREETINGS.find(g => g.id === recipientId);
-  
-  // Set up sound (using placeholder URLs from soundMap)
+  // Friend options for random greetings
+  const friendOptions = {
+    messages: [
+      "Wishing you a magical Christmas season filled with joy, peace, and wonderful memories! May your holidays be as special as you are!",
+      "Sending warmest Christmas cheer your way! Hope your day is filled with laughter, good food, and the company of loved ones.",
+      "May the magic of Christmas fill every corner of your heart and home. Wishing you a season of blessings and happy moments!",
+      "Thinking of you this holiday season and sending a sleigh-full of good wishes your way! Merry Christmas!",
+      "Hope your Christmas is sparkling with moments of love, laughter, and goodwill. You deserve all the happiness this season brings!"
+    ],
+    sounds: ['JINGLE', 'BELLS', 'CHOIR', 'SANTA', 'HIGH'],
+    icons: ['🎄', '🎅', '🤶', '🦌', '⭐', '✨', '🎁', '🔔', '⛄', '🌟'],
+    colorSchemes: [
+      ['#B71C1C', '#1B5E20', '#FFD700', '#0D47A1', '#4A148C'],
+      ['#4A148C', '#880E4F', '#006064', '#BF360C', '#33691E'],
+      ['#0D47A1', '#F57C00', '#1B5E20', '#D81B60', '#311B92'],
+      ['#880E4F', '#004D40', '#B71C1C', '#1A237E', '#FF6F00'],
+      ['#00695C', '#F57C00', '#4527A0', '#C62828', '#558B2F']
+    ]
+  };
+
+  // Generate random friend greeting
+  const generateRandomFriendGreeting = () => {
+    const randomMessage = friendOptions.messages[Math.floor(Math.random() * friendOptions.messages.length)];
+    const randomSound = friendOptions.sounds[Math.floor(Math.random() * friendOptions.sounds.length)];
+    const randomIcon = friendOptions.icons[Math.floor(Math.random() * friendOptions.icons.length)];
+    const randomColors = friendOptions.colorSchemes[Math.floor(Math.random() * friendOptions.colorSchemes.length)];
+    
+    return {
+      id: 'friends',
+      recipient: 'My Facebook Friend',
+      sound: randomSound,
+      message: randomMessage,
+      confettiColors: randomColors,
+      niceScore: 90 + Math.floor(Math.random() * 10),
+      icon: randomIcon,
+    };
+  };
+
+  // Determine recipient using useMemo
+  const recipient = useMemo(() => {
+    if (recipientId === 'friends') {
+      // Generate fresh random greeting
+      return generateRandomFriendGreeting();
+    } else {
+      // Find in your original GREETINGS array
+      return GREETINGS.find(g => g.id === recipientId);
+    }
+  }, [recipientId, greetingVersion]); // Re-run when recipientId or version changes
+
+  // Set up sound (must be called BEFORE any conditional returns)
   const [playSound, { stop, pause }] = useSound(
-    SOUND_MAP[recipient?.sound]?.url || SOUND_MAP.JINGLE.url,
+    recipient?.sound ? SOUND_MAP[recipient.sound]?.url : SOUND_MAP.JINGLE.url,
     {
-      volume: SOUND_MAP[recipient?.sound]?.volume || 0.5,
+      volume: recipient?.sound ? SOUND_MAP[recipient.sound]?.volume : 0.5,
       onplay: () => setIsPlaying(true),
       onend: () => setIsPlaying(false),
       onpause: () => setIsPlaying(false),
     }
   );
-  
+
   // Create dynamic theme based on recipient's first confetti color
   const dynamicTheme = createTheme({
     ...baseTheme,
     palette: {
       ...baseTheme.palette,
       primary: {
-        main: recipient?.confettiColors[0] || '#B71C1C',
-        light: recipient?.confettiColors[1] || '#1B5E20',
+        main: recipient?.confettiColors?.[0] || '#B71C1C',
+        light: recipient?.confettiColors?.[1] || '#1B5E20',
       },
     },
   });
-  
+
   // Toggle sound
   const handleSoundToggle = () => {
     if (isPlaying) {
@@ -73,7 +123,16 @@ const GiftPage = () => {
       setIsSoundOn(!isSoundOn);
     }
   };
-  
+
+  // Handle new random greeting
+  const handleNewGreeting = () => {
+    setGreetingVersion(prev => prev + 1);
+    setAnimatedText('');
+    setTextIndex(0);
+    setShowCard(false);
+    setTimeout(() => setShowCard(true), 300);
+  };
+
   // Initial effects on mount
   useEffect(() => {
     if (!recipient) return;
@@ -100,7 +159,7 @@ const GiftPage = () => {
       stop();
     };
   }, [recipient, playSound, stop, isSoundOn, isPlaying]);
-  
+
   // Text animation effect with mobile optimization
   useEffect(() => {
     if (!recipient || !showCard) return;
@@ -115,13 +174,13 @@ const GiftPage = () => {
       return () => clearTimeout(timer);
     }
   }, [textIndex, showCard, recipient, isMobile]);
-  
+
   // Handle window resize for confetti and snowfall
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
   });
-  
+
   useEffect(() => {
     const handleResize = () => {
       setWindowSize({
@@ -133,8 +192,8 @@ const GiftPage = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  
-  // Handle invalid recipient
+
+  // Handle invalid recipient (AFTER all hooks)
   if (!recipient) {
     return (
       <Paper elevation={24} sx={{ 
@@ -154,7 +213,7 @@ const GiftPage = () => {
       </Paper>
     );
   }
-  
+
   return (
     <ThemeProvider theme={dynamicTheme}>
       {/* Persistent Confetti Effect with mobile optimization */}
@@ -164,7 +223,7 @@ const GiftPage = () => {
           height={windowSize.height}
           colors={recipient.confettiColors}
           recycle={true}
-          numberOfPieces={isMobile ? 100 : 150} // Fewer pieces on mobile
+          numberOfPieces={isMobile ? 100 : 150}
           gravity={0.08}
           wind={0.01}
           initialVelocityX={isMobile ? 2 : 3}
@@ -177,8 +236,8 @@ const GiftPage = () => {
       {/* Snowfall Effect with mobile optimization */}
       <Snowfall
         color="#ffffff"
-        snowflakeCount={isMobile ? 80 : 120} // Fewer flakes on mobile
-        radius={[0.5, isMobile ? 2.5 : 3.0]} // Smaller flakes on mobile
+        snowflakeCount={isMobile ? 80 : 120}
+        radius={[0.5, isMobile ? 2.5 : 3.0]}
         speed={[0.5, 1.5]}
         wind={[-0.2, 0.3]}
         rotationSpeed={[-0.5, 0.5]}
@@ -213,12 +272,10 @@ const GiftPage = () => {
         >
           {/* SHOW MUTED ICON WHEN SOUND IS OFF */}
           {isSoundOn ? (
-            // MUTED: Speaker with red slash
             <>
               <VolumeOffIcon sx={{ fontSize: isMobile ? 20 : 24 }} />
             </>
           ) : (
-            // UNMUTED: Normal speaker icon
             <VolumeUpIcon sx={{ fontSize: isMobile ? 20 : 24 }} />
           )}
         </IconButton>
@@ -359,6 +416,7 @@ const GiftPage = () => {
                   </Typography>
                 </Paper>
                 
+                
                 {/* Signature - Responsive sizing */}
                 <Fade in={textIndex >= recipient.message.length} timeout={1000}>
                   <Box sx={{ 
@@ -420,3 +478,4 @@ const GiftPage = () => {
 };
 
 export default GiftPage;
+
