@@ -23,7 +23,7 @@ import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import { GREETINGS } from '../config/greetings';
 import { SOUND_MAP } from '../soundMap';
 import { Refresh, RefreshOutlined } from '@mui/icons-material';
-
+import santa from '../assets/santa.png'
 const GiftPage = () => {
   const { recipientId } = useParams();
   const baseTheme = useTheme();
@@ -440,7 +440,11 @@ const GiftPage = () => {
                         fontSize: isMobile ? '1rem' : '1.25rem'
                       }}
                     >
-                      🎅 kyaw 🎅
+           <div>
+   <img src={santa} alt="Festive" style={{ width: '70px', height: '90px', verticalAlign: 'middle' }} /> 
+</div>
+
+
                     </Typography>
                     <Typography 
                       variant="caption" 
