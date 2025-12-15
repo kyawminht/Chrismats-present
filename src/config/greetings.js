@@ -118,6 +118,16 @@ const GREETINGS = [
   niceScore: 97,
   icon: '✨',
 }
+,
+{
+  id: 'xav',
+  recipient: 'Xavier',
+  sound: 'HIGH',
+  message: "Hey bro, May your heart be light and your days be bright this Christmas. Wishing you a joyful holiday filled with love, laughter, and unforgettable moments. Merry Christmas!",
+  confettiColors: ['#880E4F', '#4E342E', '#1A237E', '#00695C', '#F9A825'],
+  niceScore: 97,
+  icon: '🎄',
+}
 
 
 
