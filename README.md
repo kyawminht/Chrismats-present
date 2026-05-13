@@ -57,7 +57,7 @@ A **personalized digital Christmas card** with:
 > *"A Christmas Message from Kyaw 🎄"*  
 > *"Although I can't give big gifts, you are always in my thoughts."*
 
-![Telegram Preview](./public/telegram-preview.jpg)
+![Telegram Preview](./public/telegram-preview.png)
 
 ---
 
